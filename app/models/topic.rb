@@ -17,4 +17,9 @@ class Topic
   field :last_active_mark, type: Integer
   field :lock_node, type: Mongoid::Boolean, default: false
   field :excellent, type: Integer, default: 0
+
+  belongs_to :user, inverse_of: :topics
+  belongs_to :node
+  has_many :appends, dependent: :destroy
+  has_many :replies, dependent: :destroy
 end

@@ -3,4 +3,6 @@ class Location
 
   field :name
   field :users_count, type: Integer, default: 0
+
+  has_many :user
 end
