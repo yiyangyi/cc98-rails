@@ -33,7 +33,6 @@ gem 'grape', '~> 0.11.0'
 gem 'rouge', '~> 1.8.0'
 gem 'dalli', '~> 2.7.2'
 gem 'puma', '~> 2.11.1'
-gem 'thin', '~> 1.6.3'
 gem 'god', '~> 0.13.5'
 
 gem 'jquery-rails'
