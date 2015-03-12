@@ -1,61 +1,66 @@
 Rails.application.routes.draw do
-  get 'users/index'
-
-  get 'users/show'
-
   devise_for :users
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'home#index'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  get "search" => 'search#index', as: :search
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  resources :sites
+  resources :comments
+  resources :nodes
+  resources :photos
+  resources :likes
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  resources :notes do
+    collection do
+      post :preview
+    end
+  end
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  resources :notifications, only: [:index, :destroy] do
+    collection do
+      post :clean
+    end
+  end
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  get "topics/node:id" => "topics#node", as: :node_topics
+  get "topics/node:id/feed" => "topics#node_feed", as: :node_feed
+  get "topics/last" => "topics#last", as: :recent_topics
+  resources :topics do
+    member do
+      post :reply
+      post :favorite
+      delete :unfavorite
+      post :follow
+      delete :unfollow
+      patch :suggest
+      delete :unsuggest
+    end
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
+    collection do
+      get :no_reply
+      get :poplular
+      get :excellent
+      get :preview
+      get :feed, default: { format: 'xml' }
+    end
+  end
 
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
+  namespace :cpanel do
+    root to: "home#index"
+    resources :users
+    resources :sections
+    resources :nodes
+    resources :topics do
+      member do
+        post :suggest
+        post :unsuggest
+        post :undestroy
+      end
+    end
+    resources :photos
+    resources :comments
+  end
 
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  match '*path', to: 'home#404', via: :all
 end
