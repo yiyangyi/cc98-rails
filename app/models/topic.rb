@@ -22,4 +22,11 @@ class Topic
   belongs_to :node
   has_many :appends, dependent: :destroy
   has_many :replies, dependent: :destroy
+
+  index node_id: 1
+  index user_id: 1
+  index last_active_mark: -1
+  index like_count: 1
+  index suggested_at: 1
+  index excellent: -1
 end

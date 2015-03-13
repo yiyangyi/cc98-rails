@@ -7,4 +7,6 @@ class Append
   field :append_at, type: DateTime
 
   belongs_to :topic, inverse_of: :appends
+
+  index topic_id: 1
 end

@@ -8,4 +8,7 @@ class Note
   field :publish, type: Mongoid::Boolean, default: false
 
   belongs_to :user
+
+  index user_id: 1
+  index updated_at: -1
 end

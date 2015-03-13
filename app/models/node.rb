@@ -8,4 +8,6 @@ class Node
 
   has_many :topics
   belongs_to :section
+
+  index section_id: 1
 end
