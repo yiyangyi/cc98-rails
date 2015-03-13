@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :unread_notify_count
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+
   def set_seo_meta(title = '', meta_keyword = '', meta_description = '')
   	@page_title = "#{title}" if title.length > 0
   	@meta_keyword = meta_keyword
