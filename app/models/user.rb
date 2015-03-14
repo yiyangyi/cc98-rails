@@ -7,6 +7,7 @@ class User
 
   ## Database authenticatable
   field :email,              type: String, default: ""
+  field :email_public,       type: Mongoid::Boolean
   field :encrypted_password, type: String, default: ""
 
   ## Recoverable
@@ -23,16 +24,21 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
-  ## Confirmable
-  # field :confirmation_token,   type: String
-  # field :confirmed_at,         type: Time
-  # field :confirmation_sent_at, type: Time
-  # field :unconfirmed_email,    type: String # Only if using reconfirmable
-
-  ## Lockable
-  # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
-  # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
-  # field :locked_at,       type: Time
+  ## Custom field
+  field :login
+  field :name
+  field :location
+  field :location_id,        type: Integer
+  field :bio
+  field :tagline  
+  field :website
+  field :private_token
+  field :verified,           type: Mongoid::Boolean, default: false
+  field :state,              type: Integer,          default: 1
+  field :guest,              type: Mongoid::Boolean, defulat: false
+  field :topic_count,        type: Integer,          default: 0
+  field :replies_count,      type: Integer,          default: 0
+  field :favorite_topic_ids, type: Array,            default: []
   
   STATE = { deleted: -1, normal: 1, blocked: 2 }
 
