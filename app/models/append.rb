@@ -1,5 +1,6 @@
 class Append
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   field :topic_id, type: Integer
   field :content
