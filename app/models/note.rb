@@ -11,4 +11,7 @@ class Note
 
   index user_id: 1
   index updated_at: -1
+
+  scope :published, -> { where(publish: true) }
+  scope :recent_updated, -> { desc(updated_at) }
 end
