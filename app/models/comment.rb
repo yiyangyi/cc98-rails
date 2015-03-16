@@ -10,4 +10,6 @@ class Comment
   index user_id: 1
   index commentable_id: 1
   index commentable_type: 1
+
+  validates :body, presence: true
 end

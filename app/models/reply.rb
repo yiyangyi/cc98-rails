@@ -13,4 +13,7 @@ class Reply
 
   index user_id: 1
   index topic_id: 1
+
+  validates :body, presence: true
+  validates :body, uniqueness: true, scope: [:topic_id, :user_id], message: ""
 end

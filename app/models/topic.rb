@@ -24,6 +24,8 @@ class Topic
   has_many :appends, dependent: :destroy
   has_many :replies, dependent: :destroy
 
+  validates_presence_of :user_id, :title, :body, :node
+
   index node_id: 1
   index user_id: 1
   index last_active_mark: -1
