@@ -27,7 +27,16 @@ class Topic
   index node_id: 1
   index user_id: 1
   index last_active_mark: -1
-  index like_count: 1
+  index likes_count: 1
   index suggested_at: 1
   index excellent: -1
+
+  scope :no_reply, -> { where(replies_count: 0) }
+  scope :high_replies, -> { desc(:replies_count, :_id) }
+  scope :high_likes, -> { desc(:likes_count, :_id) }
+  scope :last_activated, -> { desc(:last_active_mark) }
+  scope :suggest, -> { where(:suggested_at.ne => nil).desc(:suggested_at) }
+  scope :popluar, -> { where(:like_count.gt => 5 ) }
+  scope :excellent, -> { where(:excellent.gte => 1) }
+  scope :without_node_ids, Proc.new { |ids| where(:node_ids.nin => ids) }
 end
