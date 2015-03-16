@@ -6,4 +6,7 @@ class Section
   field :sort, type: Integer, default: 0
 
   has_many :nodes, dependent: :destroy
+
+  default_scope { desc(:sort) }
+
 end
