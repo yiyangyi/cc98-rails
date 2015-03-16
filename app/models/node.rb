@@ -11,4 +11,7 @@ class Node
   belongs_to :section
 
   index section_id: 1
+
+  scope :hots, -> { desc(:topic_count) }
+  scope :sorted, -> { desc(:sort) }
 end
