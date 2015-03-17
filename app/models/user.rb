@@ -78,4 +78,34 @@ class User
       else false
     end
   end
+
+  def like(likable)
+    return false if likable.blank? or likable.liked_by_user?(self)
+    likable.push(liked_user_ids: self.id)
+    likable.inc(likes_count: 1)
+    likable.touch
+  end
+
+  def unlike(likable)
+    return false if likable.blank?
+    return false if not likable.liked_by_user?(self)
+    likable.pull(liked_user_ids: -1)
+    likable.inc(likes_count: -1)
+    likable.touch
+  end
+
+  def favorite_topic(topic_id)
+    return false if topic_id.blank?
+    topic_id = topic_id.to_i
+    return false if self.favorite_topic_ids.include?(topic_id)
+    self.push(favorite_topic_ids: topic_id)
+    true
+  end
+
+  def unfavorite_topic(topic_id)
+    return false if topic_id.blank?
+    topic_id = topic_id.to_i
+    self.pull(favorite_topic_ids: topic_id)
+    true
+  end
 end
