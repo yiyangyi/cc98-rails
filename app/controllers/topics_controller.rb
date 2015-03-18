@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  
+
 	def index
 	end
 
@@ -7,9 +7,18 @@ class TopicsController < ApplicationController
 	end
 
 	def new
+    @topic = Topic.new
 	end
 
 	def create
+    @topic = Topic.new(topic_params)
+    @topic.user_id = current_user.id
+    @topic.node_id = params[:node] || topic_params[:node_id]
+    if @topic.save
+      redirect_to(topic_path(@topic.id), notice: "Topic created successfully.")
+    else
+      render action: :new
+    end
 	end
 
 	def edit
@@ -33,7 +42,7 @@ class TopicsController < ApplicationController
 	%W(no_reply popular).each do |name|
 		define_method(name) do
 		end
-	end 
+	end
 
 	def node
 	end
