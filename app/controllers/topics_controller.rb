@@ -1,16 +1,16 @@
 class TopicsController < ApplicationController
 
-	def index
-	end
+  def index
+  end
 
-	def feed
-	end
+  def feed
+  end
 
-	def new
+  def new
     @topic = Topic.new
-	end
+  end
 
-	def create
+  def create
     @topic = Topic.new(topic_params)
     @topic.user_id = current_user.id
     @topic.node_id = params[:node] || topic_params[:node_id]
@@ -19,61 +19,61 @@ class TopicsController < ApplicationController
     else
       render action: :new
     end
-	end
+  end
 
-	def edit
-	end
+  def edit
+  end
 
-	def update
-	end
+  def update
+  end
 
-	def destroy
-	end
+  def destroy
+  end
 
-	def preview
-	end
+  def preview
+  end
 
-	def recent
-	end
+  def recent
+  end
 
-	def excellent
-	end
+  def excellent
+  end
 
-	%W(no_reply popular).each do |name|
-		define_method(name) do
-		end
+  %W(no_reply popular).each do |name|
+	define_method(name) do
 	end
+  end
 
-	def node
-	end
+  def node
+  end
 
-	def follow
-	end
+  def follow
+  end
 
-	def unfollow
-	end
+  def unfollow
+  end
 
-	def favorite
-    current_user.favorite_topic(params[:id])
-    render text: '1'
-	end
+  def favorite
+	current_user.favorite_topic(params[:id])
+	render text: '1'
+  end
 
-	def unfavorite
-    current_user.unfavorite_topic(params[:id])
-    render text: '1'
-	end
+  def unfavorite
+	current_user.unfavorite_topic(params[:id])
+	render text: '1'
+  end
 
-	def suggest
-    @topic = Topic.find(params[:id])
-    @topic.update_attributes(excellent: 1)
-    redirect_to @topic, success: 'Suggest successfully.'
-	end
+  def suggest
+	@topic = Topic.find(params[:id])
+	@topic.update_attributes(excellent: 1)
+	redirect_to @topic, success: 'Suggest successfully.'
+  end
 
-	def unsuggest
-    @topic = Topic.find(params[:id])
-    @topic.update_attributes(excellent: 0)
-    redirect_to @topic, success: 'Unsuggest successfully.'
-	end
+  def unsuggest
+	@topic = Topic.find(params[:id])
+	@topic.update_attributes(excellent: 0)
+	redirect_to @topic, success: 'Unsuggest successfully.'
+  end
 
   private
 
