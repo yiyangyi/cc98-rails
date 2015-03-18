@@ -54,15 +54,25 @@ class TopicsController < ApplicationController
 	end
 
 	def favorite
+    current_user.favorite_topic(params[:id])
+    render text: '1'
 	end
 
 	def unfavorite
+    current_user.unfavorite_topic(params[:id])
+    render text: '1'
 	end
 
 	def suggest
+    @topic = Topic.find(params[:id])
+    @topic.update_attributes(excellent: 1)
+    redirect_to @topic, success: 'Suggest successfully.'
 	end
 
 	def unsuggest
+    @topic = Topic.find(params[:id])
+    @topic.update_attributes(excellent: 0)
+    redirect_to @topic, success: 'Unsuggest successfully.'
 	end
 
   private
