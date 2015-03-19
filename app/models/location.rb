@@ -5,4 +5,6 @@ class Location
   field :users_count, type: Integer, default: 0
 
   has_many :user
+
+  scope :hot, -> { desc(:users_count) }
 end
