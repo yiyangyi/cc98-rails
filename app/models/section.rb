@@ -9,4 +9,7 @@ class Section
 
   default_scope { desc(:sort) }
 
+  validates :name, presence: true
+  validates :name, uniqueness: true
+
 end
