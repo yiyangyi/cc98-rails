@@ -59,6 +59,12 @@ class User
 
   mount_uploader :avartar, AvatarUploader
 
+  validates :login, presence: true
+  validates :login, uniqueness: true
+  validates :login, length: 3..10
+  validates :login, format: { with: /\A\w+\Z/, message: 'Only allow numbers, letters and underscores!' }
+
+
   STATE = { deleted: -1, normal: 1, blocked: 2 }
 
   def newbie?
