@@ -17,7 +17,7 @@ class Note
   index updated_at: -1
 
   scope :published, -> { where(publish: true) }
-  scope :recent_updated, -> { desc(updated_at) }
+  scope :recent_updated, -> { desc(:updated_at) }
 
   def auto_set_value
     if !self.body.blank?
