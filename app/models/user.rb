@@ -37,9 +37,11 @@ class User
   field :verified,           type: Mongoid::Boolean, default: false
   field :state,              type: Integer,          default: 1
   field :guest,              type: Mongoid::Boolean, defulat: false
-  field :topic_count,        type: Integer,          default: 0
+  field :topics_count,       type: Integer,          default: 0
   field :replies_count,      type: Integer,          default: 0
   field :favorite_topic_ids, type: Array,            default: []
+
+  scope :active, -> { desc(:replies_count, :topics_count) }
 
   has_many :notes
   has_many :photos
