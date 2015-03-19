@@ -49,6 +49,10 @@ class User
   has_many :replies,       dependent: :destroy
   has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
 
+  has_and_belongs_to_many :followers,       class_name: 'User', inverse_of: :followings
+  has_and_belongs_to_many :followings,      class_name: 'User', inverse_of: :followers
+  has_and_belongs_to_many :following_nodes, class_name: 'Node', inverse_of: :followers
+
   index login: 1
   index email: 1
   index location: 1
