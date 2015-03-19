@@ -31,7 +31,7 @@ class User
   field :location
   field :location_id,        type: Integer
   field :bio
-  field :tagline  
+  field :tagline
   field :website
   field :private_token
   field :verified,           type: Mongoid::Boolean, default: false
@@ -40,7 +40,9 @@ class User
   field :topic_count,        type: Integer,          default: 0
   field :replies_count,      type: Integer,          default: 0
   field :favorite_topic_ids, type: Array,            default: []
-  
+
+  mount_uploader :avartar, AvatarUploader
+
   STATE = { deleted: -1, normal: 1, blocked: 2 }
 
   def newbie?
