@@ -41,6 +41,12 @@ class User
   field :replies_count,      type: Integer,          default: 0
   field :favorite_topic_ids, type: Array,            default: []
 
+  has_many :notes
+  has_many :photos
+  has_many :topics,        dependent: :destroy
+  has_many :replies,       dependent: :destroy
+  has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
+
   mount_uploader :avartar, AvatarUploader
 
   STATE = { deleted: -1, normal: 1, blocked: 2 }
