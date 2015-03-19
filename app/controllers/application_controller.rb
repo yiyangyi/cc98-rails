@@ -10,13 +10,14 @@ class ApplicationController < ActionController::Base
   	@page_title = "#{title}" if title.length > 0
   	@meta_keyword = meta_keyword
   	@meta_description = meta_description
-  end	
+  end
 
   def require_user
   	if current_user.blank?
   		respond_to do |format|
   			format.html { authenticate_user! }
   			format.all { head(:unauthorized) }
+      end
   	end
   end
 
@@ -39,5 +40,5 @@ class ApplicationController < ActionController::Base
   def render_404
   	render_optional_error_file(404)
   end
-  
+
 end
