@@ -16,4 +16,9 @@ class Node
 
   scope :hots, -> { desc(:topic_count) }
   scope :sorted, -> { desc(:sort) }
+
+  validates :name,    presence: true
+  validates :section, presence: true
+  validates :summary, presence: true
+  validates :name,    uniqueness: true
 end
