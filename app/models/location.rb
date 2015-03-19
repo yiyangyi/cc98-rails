@@ -9,4 +9,6 @@ class Location
   scope :hot, -> { desc(:users_count) }
 
   index :name
+
+  validates :name, uniqueness: true
 end
