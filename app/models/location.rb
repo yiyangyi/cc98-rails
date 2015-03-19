@@ -7,4 +7,6 @@ class Location
   has_many :user
 
   scope :hot, -> { desc(:users_count) }
+
+  index :name
 end
