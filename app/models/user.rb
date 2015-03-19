@@ -47,6 +47,10 @@ class User
   has_many :replies,       dependent: :destroy
   has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
 
+  index login: 1
+  index email: 1
+  index location: 1
+
   mount_uploader :avartar, AvatarUploader
 
   STATE = { deleted: -1, normal: 1, blocked: 2 }
