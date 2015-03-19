@@ -1,4 +1,6 @@
 class NotesController < ApplicationController
+  load_and_authorize_resource
+
   def index
     @notes = current_user.notes.recent_updated
   end

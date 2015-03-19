@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+  load_and_authorize_resource
+
   def create
     @photo = Photo.new
     @photo.photo = params[:Filedata]

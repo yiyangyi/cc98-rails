@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+  load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy, :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest]
 
   def index
   end

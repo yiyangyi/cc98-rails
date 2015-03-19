@@ -1,4 +1,5 @@
 class RepliesController < ApplicationController
+  load_and_authorize_resource :reply
   before_action :find_topic
 
   def create
