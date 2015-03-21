@@ -42,6 +42,12 @@ class Topic
   scope :excellent, -> { where(:excellent.gte => 1) }
   scope :without_node_ids, Proc.new { |ids| where(:node_ids.nin => ids) }
 
+  searchable do
+    text :title, :boost => 5.0
+    text :body_html
+    time :created_at
+  end
+
   def push_followers(uid)
     return false if self.uid == uid
     return false if self.follower_ids.include?(uid)
