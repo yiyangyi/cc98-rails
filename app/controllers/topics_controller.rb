@@ -46,6 +46,9 @@ class TopicsController < ApplicationController
   end
 
   def node
+    @node = Node.find(params[:id])
+    @topics = @node.topics.last_activated.includes(:user).paginate(page: params[:page], per_page: 20)
+    render action: :index
   end
 
   def follow
