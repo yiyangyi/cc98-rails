@@ -55,9 +55,15 @@ class TopicsController < ApplicationController
   end
 
   def follow
+    @topic = Topic.find(params[:id])
+    @topic.push_follower(current_user.id)
+    render text: '1'
   end
 
   def unfollow
+    @topic = Topic.find(params[:id])
+    @topic.pull_follower(current_user.id)
+    render text: '1'
   end
 
   def favorite
