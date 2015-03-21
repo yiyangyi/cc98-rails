@@ -34,7 +34,7 @@ gem 'rouge', '~> 1.8.0'
 gem 'dalli', '~> 2.7.2'
 gem 'puma', '~> 2.11.1'
 gem 'god', '~> 0.13.5'
-
+gem 'sunspot_rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
