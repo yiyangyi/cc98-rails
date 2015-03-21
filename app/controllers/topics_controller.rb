@@ -35,6 +35,9 @@ class TopicsController < ApplicationController
   end
 
   def recent
+    @topic = Topic.recent.includes(:user)
+    @topic = @topic.paginate(page: params[:page], per_page: 20)
+    render action: :index
   end
 
   def excellent
