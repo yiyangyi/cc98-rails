@@ -38,6 +38,9 @@ class TopicsController < ApplicationController
   end
 
   def excellent
+    @topics = Topic.excellent.recent.includes(:user)
+    @topics = @topics.paginate(page: params[:page], per_page: 20)
+    render action: :index
   end
 
   %W(no_reply popular).each do |name|
