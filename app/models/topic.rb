@@ -54,4 +54,8 @@ class Topic
     self.pull(follower_ids: uid)
     true
   end
+
+  def excellent?
+    self.excellent > 0
+  end
 end
