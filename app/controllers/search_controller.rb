@@ -1,5 +1,11 @@
 class SearchController < ApplicationController
   def index
+  	@search = Topic.search do 
+  	  fulltext params[:q]
+  	  with(:created_at).less_than(Time.zone.now)
+  	end
+
+  	@articles = topics.results.paginate(page[:params], per_page: 20)
   end
 
   def google
