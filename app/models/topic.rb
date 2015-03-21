@@ -41,4 +41,17 @@ class Topic
   scope :popluar, -> { where(:like_count.gt => 5 ) }
   scope :excellent, -> { where(:excellent.gte => 1) }
   scope :without_node_ids, Proc.new { |ids| where(:node_ids.nin => ids) }
+
+  def push_followers(uid)
+    return false if self.uid == uid
+    return false if self.follower_ids.include?(uid)
+    self.push(follower_ids: uid)
+    true
+  end
+
+  def pull_followers(uid)
+    return false if self.uid == uid
+    self.pull(follower_ids: uid)
+    true
+  end
 end
