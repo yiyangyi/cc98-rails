@@ -10,5 +10,16 @@ class Notification::Base
   index user_id: 1, read: 1
 
   scope :unread, -> { where(read: false) }
-  
+
+  def push_to_client_realtime
+  	if self.user
+  	  hash[:count] = self.user.notification.unread.count
+  	  FayeClient.send("/notifications_count/#{self.user.access_token}", hash)
+  	end
+  end
+
+  def anchor
+  	"notification-#{id}"
+  end
+
 end
