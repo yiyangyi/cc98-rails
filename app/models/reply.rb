@@ -1,6 +1,7 @@
 class Reply
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Likable
 
   field :body
   field :body_html
@@ -20,5 +21,9 @@ class Reply
   def self.per_page
     25
   end
-  
+
+  def self.popular?
+    self.likes_count >= 5
+  end
+
 end
