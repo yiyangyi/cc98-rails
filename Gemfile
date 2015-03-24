@@ -26,6 +26,7 @@ gem 'omniauth', '~> 1.2.2'
 gem 'postmark', '~> 1.5.0'
 gem 'hiredis', '~> 0.6.0'
 gem 'sidekiq', '~> 3.3.2'
+gem 'whenever', :require => false
 gem 'sinatra', '~> 1.4.5', :require => nil
 gem 'mongoid', '~> 4.0.2'
 gem 'devise', '~> 3.4.1'
@@ -41,6 +42,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
+  gem 'capistrano', '~> 3.3.0'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
