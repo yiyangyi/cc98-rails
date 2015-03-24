@@ -22,4 +22,8 @@ class Notification::Base
   	"notification-#{id}"
   end
 
+  def content_path
+    ''
+  end
+
 end
