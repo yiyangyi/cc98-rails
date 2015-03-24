@@ -13,6 +13,7 @@ class Notification::Base
 
   def push_to_client_realtime
   	if self.user
+      hash = self.notice_hash
   	  hash[:count] = self.user.notification.unread.count
   	  FayeClient.send("/notifications_count/#{self.user.access_token}", hash)
   	end
