@@ -16,4 +16,9 @@ class Reply
 
   validates :body, presence: true
   validates :body, uniqueness: true, scope: [:topic_id, :user_id], message: ""
+
+  def self.per_page
+    25
+  end
+  
 end
