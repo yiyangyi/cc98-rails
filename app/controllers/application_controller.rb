@@ -43,6 +43,11 @@ class ApplicationController < ActionController::Base
     render_optional_error_file(404)
   end
 
+  def fresh_when(opts = {})
+    opts[:etag] ||= []
+    super(opts)
+  end
+
   protected
 
   def configure_permitted_parameters
